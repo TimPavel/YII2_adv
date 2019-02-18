@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b0fdaea995ee01ef3d8d6c90e946248c",
+    "content-hash": "f6dc1e720fac0d31a6518fa3e3d10792",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -376,24 +376,24 @@
         },
         {
             "name": "dmstr/yii2-adminlte-asset",
-            "version": "2.6.2",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dmstr/yii2-adminlte-asset.git",
-                "reference": "c96336e1960ebc6c1e72487a7c6ca1a1589519fe"
+                "reference": "84928c5b3a886bd3a6cdde88bb8327bf1c088e7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dmstr/yii2-adminlte-asset/zipball/c96336e1960ebc6c1e72487a7c6ca1a1589519fe",
-                "reference": "c96336e1960ebc6c1e72487a7c6ca1a1589519fe",
+                "url": "https://api.github.com/repos/dmstr/yii2-adminlte-asset/zipball/84928c5b3a886bd3a6cdde88bb8327bf1c088e7c",
+                "reference": "84928c5b3a886bd3a6cdde88bb8327bf1c088e7c",
                 "shasum": ""
             },
             "require": {
-                "almasaeed2010/adminlte": "^2.4.0",
+                "almasaeed2010/adminlte": "~2.0",
                 "cebe/yii2-gravatar": "1.*",
                 "rmrevin/yii2-fontawesome": "~2.9",
                 "yiisoft/yii2": "2.*",
-                "yiisoft/yii2-bootstrap": "~2.0.0"
+                "yiisoft/yii2-bootstrap": "2.*"
             },
             "type": "yii2-extension",
             "extra": {
@@ -420,19 +420,13 @@
                     "email": "et.coder@gmail.com"
                 }
             ],
-            "description": "AdminLTE backend theme asset bundle for Yii 2.0 Framework",
+            "description": "Backend theme for Yii2 Framework",
             "keywords": [
                 "AdminLTE",
-                "admin",
-                "asset",
-                "backend",
-                "css",
                 "extension",
-                "less",
-                "theme",
                 "yii2"
             ],
-            "time": "2018-07-24T14:47:13+00:00"
+            "time": "2015-06-01T20:35:02+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -2265,6 +2259,7 @@
                 "mock",
                 "xunit"
             ],
+            "abandoned": true,
             "time": "2018-08-09T05:50:03+00:00"
         },
         {
