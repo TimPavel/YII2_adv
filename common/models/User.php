@@ -186,4 +186,51 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getActivedTasks()
+    {
+        return $this->hasMany(Task::class, ['executor_id' => 'id']);
+    }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCreatedTasks()
+    {
+        return $this->hasMany(Task::class, ['creator_id' => 'id']);
+    }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUpdatedTasks()
+    {
+        return $this->hasMany(Task::class, ['updater_id' => 'id']);
+    }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCreatedProjects()
+    {
+        return $this->hasMany(Project::class, ['creator_id' => 'id']);
+    }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUpdatedProjects()
+    {
+        return $this->hasMany(Project::class, ['updater_id' => 'id']);
+    }
+    
+    public function fields()
+    {
+        return ['name' => 'username'];
+    }
+
 }
+

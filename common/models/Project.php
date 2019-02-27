@@ -6,6 +6,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
 
+
 /**
  * This is the model class for table "project".
  *
@@ -39,7 +40,7 @@ class Project extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'project';
+        return '{{%project}}';
     }
 
     /**

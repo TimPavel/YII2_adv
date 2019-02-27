@@ -14,6 +14,7 @@ conn.onerror = function(e) {
 };
 
 conn.onmessage = function(e) {
+  console.log(e.data);
   jumbotron.val(e.data + '\n' + jumbotron.val());
 
   var $el = $('li.messages-menu ul.menu li:first').clone();
