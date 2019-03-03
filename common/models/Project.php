@@ -6,6 +6,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
 
+
 /**
  * This is the model class for table "project".
  *
@@ -39,7 +40,7 @@ class Project extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'project';
+        return '{{%project}}';
     }
 
     /**
@@ -105,5 +106,13 @@ class Project extends \yii\db\ActiveRecord
     public static function find()
     {
         return new \common\models\query\ProjectQuery(get_called_class());
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTasks()
+    {
+        return $this->hasMany(Task::className(), ['project_id' => 'id']);
     }
 }

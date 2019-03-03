@@ -42,7 +42,7 @@ class Task extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'task';
+        return '{{%task}}';
     }
 
     /**
@@ -112,5 +112,13 @@ class Task extends \yii\db\ActiveRecord
     public static function find()
     {
         return new \common\models\query\TaskQuery(get_called_class());
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProject()
+    {
+        return $this->hasOne(Project::className(), ['id' => 'project_id']);
     }
 }
