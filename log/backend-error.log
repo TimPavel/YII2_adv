@@ -25,3 +25,17 @@
 2019/02/16 09:26:51 [error] 11276#11276: *109 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: backend.test, request: "GET / HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "backend.test"
 2019/02/28 12:59:17 [error] 876#876: *62 FastCGI sent in stderr: "PHP message: PHP Warning:  touch(): Utime failed: Permission denied in /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2-debug/src/LogTarget.php on line 85" while reading upstream, client: 127.0.0.1, server: backend.test, request: "GET /users HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "backend.test"
 2019/02/28 12:59:23 [error] 876#876: *65 FastCGI sent in stderr: "PHP message: PHP Warning:  touch(): Utime failed: Permission denied in /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2-debug/src/LogTarget.php on line 85" while reading upstream, client: 127.0.0.1, server: backend.test, request: "GET /user HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "backend.test"
+2019/03/03 21:28:43 [error] 898#898: *388 FastCGI sent in stderr: "PHP message: PHP Notice:  Trying to get property 'username' of non-object in /home/pavel/Geekbrains/adv/backend/views/layouts/admin-lte/header.php on line 112
+PHP message: PHP Notice:  Trying to get property 'username' of non-object in /home/pavel/Geekbrains/adv/backend/views/layouts/admin-lte/header.php on line 121
+PHP message: PHP Notice:  Trying to get property 'email' of non-object in /home/pavel/Geekbrains/adv/backend/views/layouts/admin-lte/header.php on line 122" while reading response header from upstream, client: 127.0.0.1, server: backend.test, request: "GET /assets/2af6ed3b/js/app.min.js HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "backend.test", referrer: "http://backend.test/site/login"
+2019/03/03 22:42:54 [error] 898#898: *672 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+Error: Call to a member function getThumbUploadUrl() on null in /home/pavel/Geekbrains/adv/backend/views/layouts/admin-lte/header.php:111
+Stack trace:
+#0 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(348): require()
+#1 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/home/pavel/Gee...', Array)
+#2 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/home/pavel/Gee...', Array," while reading upstream, client: 127.0.0.1, server: backend.test, request: "GET /assets/2af6ed3b/js/app.min.js HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "backend.test", referrer: "http://backend.test/site/login"
+2019/03/03 22:42:54 [error] 898#898: *672 FastCGI sent in stderr: " NULL)
+#3 /home/pavel/Geekbrains/adv/backend/views/layouts/admin-lte/main.php(39): yii\base\View->render('header.php', Array)
+#4 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(348): require('/home/pavel/Gee...')
+#5 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/home/pavel/Gee...', Array)
+#6 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/Controller.php(399): yii\base\View->renderFile('/home/pavel/Gee...'" while reading upstream, client: 127.0.0.1, server: backend.test, request: "GET /assets/2af6ed3b/js/app.min.js HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "backend.test", referrer: "http://backend.test/site/login"
