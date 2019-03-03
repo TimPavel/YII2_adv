@@ -107,4 +107,12 @@ class Project extends \yii\db\ActiveRecord
     {
         return new \common\models\query\ProjectQuery(get_called_class());
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTasks()
+    {
+        return $this->hasMany(Task::className(), ['project_id' => 'id']);
+    }
 }

@@ -24,12 +24,5 @@ class Project extends \common\models\Project
     {
         return [self::RELATION_TASK];
     }
-    
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTasks()
-    {
-        return $this->hasMany(Task::className(), ['project_id' => 'id']);
-    }
+
 }

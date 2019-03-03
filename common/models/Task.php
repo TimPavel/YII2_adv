@@ -113,4 +113,12 @@ class Task extends \yii\db\ActiveRecord
     {
         return new \common\models\query\TaskQuery(get_called_class());
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProject()
+    {
+        return $this->hasOne(Project::className(), ['id' => 'project_id']);
+    }
 }
