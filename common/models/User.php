@@ -82,8 +82,6 @@ class User extends ActiveRecord implements IdentityInterface
             ['status', 'in', 'range' => self::STATUSES],
             [['username', 'email', 'auth_key', 'password'], 'safe'],
             [['status', 'created_at', 'updated_at'], 'integer'],
-            ['created_at', 'default', 'value' => time()],
-            ['updated_at', 'default', 'value' => time()],
             [['username', 'email'], 'string', 'max' => 255],
             [['username'], 'unique'],
             [['email'], 'unique'],
@@ -96,6 +94,9 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function beforeSave($insert)
     {
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
         $this->generateAuthKey();
         return true;
     }
@@ -208,6 +209,7 @@ class User extends ActiveRecord implements IdentityInterface
         if($password) {
             $this->password_hash = Yii::$app->security->generatePasswordHash($password);
         }
+        $this->password = $password;
     }
 
     /**
