@@ -4,18 +4,15 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\User */
+/* @var $model common\models\Project */
 
-$this->title = $model->id;
-
-
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->title = $model->title;
+$this->params['breadcrumbs'][] = ['label' => 'Projects', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="user-view">
-    <img src="<?= $model->getThumbUploadUrl('avatar', \common\models\User::AVATAR_PREVIEW); ?>" class="img-circle"
-         alt="User Image"/>
+<div class="project-view">
+
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
@@ -33,16 +30,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'username',
-            'auth_key',
-            'password_hash',
-            'password_reset_token',
-            'email:email',
-            'status',
+            'title',
+            'description:ntext',
+            'active',
+            'creator_id',
+            'updater_id',
             'created_at',
             'updated_at',
-            'access_token',
-            'avatar',
         ],
     ]) ?>
 

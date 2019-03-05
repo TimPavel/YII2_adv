@@ -1,18 +1,18 @@
 <?php
 
-namespace common\controllers;
+namespace backend\controllers;
 
 use Yii;
-use common\models\Project;
-use backend\models\search\ProjectSearch;
+use common\models\Task;
+use common\models\search\TaskSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ProjectController implements the CRUD actions for Project model.
+ * TaskController implements the CRUD actions for Task model.
  */
-class ProjectController extends Controller
+class TaskController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class ProjectController extends Controller
     }
 
     /**
-     * Lists all Project models.
+     * Lists all Task models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ProjectSearch();
+        $searchModel = new TaskSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * Displays a single Project model.
+     * Displays a single Task model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class ProjectController extends Controller
     }
 
     /**
-     * Creates a new Project model.
+     * Creates a new Task model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Project();
+        $model = new Task();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * Updates an existing Project model.
+     * Updates an existing Task model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * Deletes an existing Project model.
+     * Deletes an existing Task model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class ProjectController extends Controller
     }
 
     /**
-     * Finds the Project model based on its primary key value.
+     * Finds the Task model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Project the loaded model
+     * @return Task the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Project::findOne($id)) !== null) {
+        if (($model = Task::findOne($id)) !== null) {
             return $model;
         }
 
