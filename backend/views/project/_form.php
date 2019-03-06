@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
+use unclead\multipleinput\MultipleInput;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Project */
@@ -10,24 +11,60 @@ use yii\widgets\ActiveForm;
 
 <div class="project-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(
+        [
+            'options' => ['enctype' => 'multipart/form-data'],
+            'layout' => 'horizontal',
+            'fieldConfig' => [
+                'horizontalCssClasses' => ['label' => 'col-sm-2',]
+            ],
+        ]); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'active')->textInput() ?>
+    <?= $form->field($model, 'active')->dropDownList(\common\models\Project::STATUS_LABELS) ?>
 
-    <?= $form->field($model, 'creator_id')->textInput() ?>
 
-    <?= $form->field($model, 'updater_id')->textInput() ?>
+    <?php if(!$model->isNewRecord) : ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
+        <?= $form->field($model, \common\models\Project::RELATION_PROJECT_USERS)->widget(MultipleInput::class, [
 
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+//            https://github.com/unclead/yii2-multiple-input
+            'id' => 'project-users-widget',
+            'max' => 10,
+            'min' => 0,
+            'addButtonPosition' => MultipleInput::POS_HEADER,
+            'columns' => [
+                [
+                    'name'  => 'project__id',
+                    'type'  => 'hiddenInput',
+                    'defaultValue' => $model->id,
+                ],
+                [
+                    'name'  => 'user_id',
+                    'type'  => 'dropDownList',
+                    'title' => 'User',
+                    'items' => \common\models\User::find()->select('username')->indexBy('id')->column(),
+                ],
+                [
+                    'name'  => 'role',
+                    'type'  => 'dropDownList',
+                    'title' => 'Роль',
+                    'items' => \common\models\ProjectUser::ROLE_LABELS,
+                ],
+            ]
+        ]);
+        ?>
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    <?php endif; ?>
+
+    <div class="row">
+        <div class="col-md-2 col-md-offset-2">
+            <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        </div>
+
     </div>
 
     <?php ActiveForm::end(); ?>
