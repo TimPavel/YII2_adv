@@ -17,6 +17,16 @@ use Yii;
  */
 class ProjectUser extends \yii\db\ActiveRecord
 {
+    const ROLE_DEVELOPER = 'developer';
+    const ROLE_MANAGER = 'manager';
+    const ROLE_TESTER = 'tester';
+
+    const ROLE_LABELS= [
+        self::ROLE_DEVELOPER => 'developer',
+        self::ROLE_MANAGER => 'manager',
+        self::ROLE_TESTER => 'tester',
+    ];
+
     /**
      * {@inheritdoc}
      */
@@ -34,8 +44,9 @@ class ProjectUser extends \yii\db\ActiveRecord
             [['project_id', 'user_id'], 'required'],
             [['project_id', 'user_id'], 'integer'],
             [['role'], 'string'],
-            [['project_id'], 'exist', 'skipOnError' => true, 'targetClass' => Project::className(), 'targetAttribute' => ['project_id' => 'id']],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            ['role', 'in', 'range' => self::ROLE_LABELS],
+            [['project_id'], 'exist', 'skipOnError' => true, 'targetClass' => Project::class, 'targetAttribute' => ['project_id' => 'id']],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -57,7 +68,7 @@ class ProjectUser extends \yii\db\ActiveRecord
      */
     public function getProject()
     {
-        return $this->hasOne(Project::className(), ['id' => 'project_id']);
+        return $this->hasOne(Project::class, ['id' => 'project_id']);
     }
 
     /**
@@ -65,7 +76,7 @@ class ProjectUser extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
     /**

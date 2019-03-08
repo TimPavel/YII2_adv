@@ -1,10 +1,10 @@
 <?php
 
-namespace common\controllers;
+namespace backend\controllers;
 
 use Yii;
 use common\models\Project;
-use backend\models\search\ProjectSearch;
+use common\models\search\ProjectSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -78,7 +78,7 @@ class ProjectController extends Controller
     /**
      * Updates an existing Project model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param'users' => $users
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -86,13 +86,33 @@ class ProjectController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $users = \common\models\User::find()->select('username')->indexBy('id')->column();
+
+        if ($this->loadModel($model) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'users' => $users,
         ]);
+    }
+
+    /**
+     * @param Project $model
+     * @return bool
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function loadModel(Project $model)
+    {
+        $data = Yii::$app->request->post($model->formName());
+        $projectUsers = $data[Project::RELATION_PROJECT_USERS] ?? null;
+
+        if($projectUsers !== null) {
+            $model->projectUsers = $projectUsers === '' ? [] : $projectUsers;
+        }
+
+        return $model->load(Yii::$app->request->post());
     }
 
     /**
@@ -124,4 +144,5 @@ class ProjectController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
 }

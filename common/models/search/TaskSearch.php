@@ -1,15 +1,15 @@
 <?php
 
-namespace backend\models\search;
+namespace common\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\User;
+use common\models\Task;
 
 /**
- * UserSearch represents the model behind the search form of `common\models\User`.
+ * TaskSearch represents the model behind the search form of `common\models\Task`.
  */
-class UserSearch extends User
+class TaskSearch extends Task
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class UserSearch extends User
     public function rules()
     {
         return [
-            [['id', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'access_token', 'avatar'], 'safe'],
+            [['id', 'project_id', 'executor_id', 'started_at', 'completed_at', 'creator_id', 'updater_id', 'created_at', 'updated_at'], 'integer'],
+            [['title', 'description'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class UserSearch extends User
      */
     public function search($params)
     {
-        $query = User::find();
+        $query = Task::find();
 
         // add conditions that should always apply here
 
@@ -59,13 +59,19 @@ class UserSearch extends User
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'status' => $this->status,
+            'project_id' => $this->project_id,
+            'executor_id' => $this->executor_id,
+            'started_at' => $this->started_at,
+            'completed_at' => $this->completed_at,
+            'creator_id' => $this->creator_id,
+            'updater_id' => $this->updater_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'email', $this->email]);
+        $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'description', $this->description]);
+
         return $dataProvider;
     }
 }
