@@ -6,6 +6,7 @@ use unclead\multipleinput\MultipleInput;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Project */
+/* @var $users common\models\Project */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -46,7 +47,7 @@ use unclead\multipleinput\MultipleInput;
                     'name'  => 'user_id',
                     'type'  => 'dropDownList',
                     'title' => 'User',
-                    'items' => \common\models\User::find()->select('username')->indexBy('id')->column(),
+                    'items' => $users,
                 ],
                 [
                     'name'  => 'role',

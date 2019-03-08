@@ -78,7 +78,7 @@ class ProjectController extends Controller
     /**
      * Updates an existing Project model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param'users' => $users
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -86,12 +86,15 @@ class ProjectController extends Controller
     {
         $model = $this->findModel($id);
 
+        $users = \common\models\User::find()->select('username')->indexBy('id')->column();
+
         if ($this->loadModel($model) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'users' => $users,
         ]);
     }
 
@@ -141,4 +144,5 @@ class ProjectController extends Controller
 
         return $model->load(Yii::$app->request->post());
     }
+
 }
