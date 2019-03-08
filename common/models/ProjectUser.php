@@ -22,9 +22,9 @@ class ProjectUser extends \yii\db\ActiveRecord
     const ROLE_TESTER = 'tester';
 
     const ROLE_LABELS= [
-        self::ROLE_DEVELOPER => 'Developer',
-        self::ROLE_MANAGER => 'Manager',
-        self::ROLE_TESTER => 'Tester',
+        self::ROLE_DEVELOPER => 'developer',
+        self::ROLE_MANAGER => 'manager',
+        self::ROLE_TESTER => 'tester',
     ];
 
     /**

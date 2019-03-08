@@ -99,6 +99,23 @@ class ProjectController extends Controller
     }
 
     /**
+     * @param Project $model
+     * @return bool
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function loadModel(Project $model)
+    {
+        $data = Yii::$app->request->post($model->formName());
+        $projectUsers = $data[Project::RELATION_PROJECT_USERS] ?? null;
+
+        if($projectUsers !== null) {
+            $model->projectUsers = $projectUsers === '' ? [] : $projectUsers;
+        }
+
+        return $model->load(Yii::$app->request->post());
+    }
+
+    /**
      * Deletes an existing Project model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -126,23 +143,6 @@ class ProjectController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-
-    /**
-     * @param Project $model
-     * @return bool
-     * @throws \yii\base\InvalidConfigException
-     */
-    public function loadModel(Project $model)
-    {
-        $data = Yii::$app->request->post($model->formName());
-        $projectUsers = $data[Project::RELATION_PROJECT_USERS] ?? null;
-
-        if($projectUsers !== null) {
-           $model->projectUsers = $projectUsers === '' ? [] : $projectUsers;
-        }
-
-        return $model->load(Yii::$app->request->post());
     }
 
 }

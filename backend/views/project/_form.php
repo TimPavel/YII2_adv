@@ -33,13 +33,13 @@ use unclead\multipleinput\MultipleInput;
         <?= $form->field($model, \common\models\Project::RELATION_PROJECT_USERS)->widget(MultipleInput::class, [
 
 //            https://github.com/unclead/yii2-multiple-input
-            'id' => 'project-users-widget',
+            'id' => 'project',
             'max' => 10,
             'min' => 0,
             'addButtonPosition' => MultipleInput::POS_HEADER,
             'columns' => [
                 [
-                    'name'  => 'project__id',
+                    'name'  => 'project_id',
                     'type'  => 'hiddenInput',
                     'defaultValue' => $model->id,
                 ],
@@ -52,7 +52,7 @@ use unclead\multipleinput\MultipleInput;
                 [
                     'name'  => 'role',
                     'type'  => 'dropDownList',
-                    'title' => 'Роль',
+                    'title' => 'Role',
                     'items' => \common\models\ProjectUser::ROLE_LABELS,
                 ],
             ]
