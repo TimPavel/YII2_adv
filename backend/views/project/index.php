@@ -33,10 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'active',
                 'filter' => \common\models\Project::STATUS_LABELS,
-                //
-//                'content'=>function($data){
-//                    return $data->active;
-//                },
+
+                'content' => function($data) {
+                    return \common\models\Project::STATUS_LABELS[$data->active];
+                }
             ],
             'creator_id',
             //'updater_id',
