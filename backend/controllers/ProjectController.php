@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\User;
 use Yii;
 use common\models\Project;
 use common\models\search\ProjectSearch;
@@ -86,9 +87,16 @@ class ProjectController extends Controller
     {
         $model = $this->findModel($id);
 
-        $users = \common\models\User::find()->select('username')->indexBy('id')->column();
+        $users = User::find()->select('username')->indexBy('id')->column();
+        $projectUsers = $model->getUsersData();
 
         if ($this->loadModel($model) && $model->save()) {
+            if ($diffRoles = array_diff_assoc($model->getUsersData(), $projectUsers)) {
+                foreach ($diffRoles as $userId => $diffRole) {
+                    Yii::$app->projectService->assignRole($model, User::findOne($userId), $diffRole);
+                }
+            }
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
