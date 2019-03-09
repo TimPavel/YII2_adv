@@ -20,7 +20,7 @@ class UserController extends Controller
     public function behaviors()
     {
         return [
-                'access' => [
+            'access' => [
                 'class' => AccessControl::class,
                 'rules' => [
                     [
