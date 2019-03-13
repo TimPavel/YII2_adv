@@ -8,6 +8,7 @@ use backend\models\search\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -21,11 +22,21 @@ class UserController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
+//            'access' => [
+//                'class' => AccessControl::class,
+//                'rules' => [
+//                    [
+//                        'allow' => true,
+//                        'actions' => ['logout'],
+//                        'roles' => ['@'],
+//                    ],
+//                ],
+//            ],
         ];
     }
 
@@ -125,5 +136,16 @@ class UserController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Update user profile
+     */
+    public function actionProfile()
+    {
+        $model = Yii::$app->user->identity;
+
+        return $this->redirect(['update', 'id' => $model->id]);
+
     }
 }

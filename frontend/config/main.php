@@ -55,6 +55,8 @@ return [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'api/user'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'api/task'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'api/project'],
+                '<controller:(user|task|project)>s' => '<controller>/index',
+                '<controller>/<id:\d+>' => '<controller>/view',
             ],
         ],
         

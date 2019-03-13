@@ -83,3 +83,85 @@ Stack trace:
 #4 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(348): require('/home/pavel/Gee...')
 #5 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/home/pavel/Gee...', Array)
 #6 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/Controller.php(399): yii\base\View->renderFile('/home/pavel/Gee...'" while reading upstream, client: 127.0.0.1, server: backend.test, request: "GET /assets/2af6ed3b/js/app.min.js HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "backend.test", referrer: "http://backend.test/site/login"
+2019/03/09 12:58:35 [error] 925#925: *841 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected ',' in /home/pavel/Geekbrains/adv/common/services/ProjectService.php on line 30" while reading response header from upstream, client: 127.0.0.1, server: backend.test, request: "POST /project/update?id=1 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "backend.test", referrer: "http://backend.test/project/update?id=1"
+2019/03/09 12:58:47 [error] 925#925: *841 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected ',' in /home/pavel/Geekbrains/adv/common/services/ProjectService.php on line 30" while reading response header from upstream, client: 127.0.0.1, server: backend.test, request: "GET /project/update?id=1 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "backend.test", referrer: "http://backend.test/project/view?id=1"
+2019/03/09 12:58:48 [error] 925#925: *841 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected ',' in /home/pavel/Geekbrains/adv/common/services/ProjectService.php on line 30" while reading response header from upstream, client: 127.0.0.1, server: backend.test, request: "GET /project/view?id=1 HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "backend.test", referrer: "http://backend.test/project/"
+2019/03/09 12:58:49 [error] 925#925: *841 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected ',' in /home/pavel/Geekbrains/adv/common/services/ProjectService.php on line 30" while reading response header from upstream, client: 127.0.0.1, server: backend.test, request: "GET /project/ HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "backend.test"
+2019/03/09 18:02:31 [error] 925#925: *1054 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /home/pavel/Geekbrains/adv/backend/controllers/UserController.php on line 136. in /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/web/Response.php:366
+Stack trace:
+#0 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/web/Response.php(339): yii\web\Response->sendHeaders()
+#1 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/web/ErrorHandler.php(135): yii\web\Response->send()
+#2 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /home/pavel/Geekbrains/adv/backend/controllers/UserController.php on line 136. in /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/web/Response.php:366
+Stack trace:
+#0 /h" while reading upstream, client: 127.0.0.1, server: backend.test, request: "GET /user/profile HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "backend.test"
+2019/03/09 19:21:12 [error] 925#925: *1430 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+Error: Call to a member function getThumbUploadUrl() on null in /home/pavel/Geekbrains/adv/backend/views/layouts/admin-lte/header.php:111
+Stack trace:
+#0 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(348): require()
+#1 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/home/pavel/Gee...', Array)
+#2 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/home/pavel/Gee...', Array," while reading upstream, client: 127.0.0.1, server: backend.test, request: "GET /assets/2af6ed3b/js/app.min.js HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "backend.test", referrer: "http://backend.test/site/login"
+2019/03/09 19:21:12 [error] 925#925: *1430 FastCGI sent in stderr: " NULL)
+#3 /home/pavel/Geekbrains/adv/backend/views/layouts/admin-lte/main.php(39): yii\base\View->render('header.php', Array)
+#4 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(348): require('/home/pavel/Gee...')
+#5 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/home/pavel/Gee...', Array)
+#6 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/Controller.php(399): yii\base\View->renderFile('/home/pavel/Gee...'" while reading upstream, client: 127.0.0.1, server: backend.test, request: "GET /assets/2af6ed3b/js/app.min.js HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "backend.test", referrer: "http://backend.test/site/login"
+2019/03/09 19:21:12 [error] 925#925: *1430 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+Error: Call to a member function getThumbUploadUrl() on null in /home/pavel/Geekbrains/adv/backend/views/layouts/admin-lte/header.php:111
+Stack trace:
+#0 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(348): require()
+#1 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/home/pavel/Gee...', Array)
+#2 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/home/pavel/Gee...', Array," while reading upstream, client: 127.0.0.1, server: backend.test, request: "GET /assets/2af6ed3b/js/app.min.js HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "backend.test", referrer: "http://backend.test/site/login"
+2019/03/09 19:21:12 [error] 925#925: *1430 FastCGI sent in stderr: " NULL)
+#3 /home/pavel/Geekbrains/adv/backend/views/layouts/admin-lte/main.php(39): yii\base\View->render('header.php', Array)
+#4 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(348): require('/home/pavel/Gee...')
+#5 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/home/pavel/Gee...', Array)
+#6 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/Controller.php(399): yii\base\View->renderFile('/home/pavel/Gee...'" while reading upstream, client: 127.0.0.1, server: backend.test, request: "GET /assets/2af6ed3b/js/app.min.js HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "backend.test", referrer: "http://backend.test/site/login"
+2019/03/09 19:46:47 [error] 926#926: *1643 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+Error: Call to a member function getThumbUploadUrl() on null in /home/pavel/Geekbrains/adv/backend/views/layouts/admin-lte/header.php:111
+Stack trace:
+#0 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(348): require()
+#1 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/home/pavel/Gee...', Array)
+#2 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/home/pavel/Gee...', Array, NULL)
+#3 /home/pavel/Geekbrains/adv/backend/views/layouts/admin-lte/main.php(39): yii\base\View->render('header" while reading upstream, client: 127.0.0.1, server: backend.test, request: "GET /assets/2af6ed3b/js/app.min.js HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "backend.test", referrer: "http://backend.test/site/login"
+2019/03/09 19:46:47 [error] 926#926: *1643 FastCGI sent in stderr: ".php', Array)
+#4 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(348): require('/home/pavel/Gee...')
+#5 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/home/pavel/Gee...', Array)
+#6 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/Controller.php(399): yii\base\View->renderFile('/home/pavel/Gee...'" while reading upstream, client: 127.0.0.1, server: backend.test, request: "GET /assets/2af6ed3b/js/app.min.js HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "backend.test", referrer: "http://backend.test/site/login"
+2019/03/09 19:46:47 [error] 927#927: *1644 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+Error: Call to a member function getThumbUploadUrl() on null in /home/pavel/Geekbrains/adv/backend/views/layouts/admin-lte/header.php:111
+Stack trace:
+#0 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(348): require()
+#1 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/home/pavel/Gee...', Array)
+#2 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/home/pavel/Gee...', Array, NULL)
+#3 /home/pavel/Geekbrains/adv/backend/views/layouts/admin-lte/main.php(39): yii\base\View->render('header" while reading upstream, client: 127.0.0.1, server: backend.test, request: "GET /assets/2af6ed3b/js/app.min.js HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "backend.test", referrer: "http://backend.test/site/login"
+2019/03/09 19:46:47 [error] 927#927: *1644 FastCGI sent in stderr: ".php', Array)
+#4 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(348): require('/home/pavel/Gee...')
+#5 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/home/pavel/Gee...', Array)
+#6 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/Controller.php(399): yii\base\View->renderFile('/home/pavel/Gee...'" while reading upstream, client: 127.0.0.1, server: backend.test, request: "GET /assets/2af6ed3b/js/app.min.js HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "backend.test", referrer: "http://backend.test/site/login"
+2019/03/10 21:46:31 [error] 925#925: *1772 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+Error: Call to a member function getThumbUploadUrl() on null in /home/pavel/Geekbrains/adv/backend/views/layouts/admin-lte/header.php:111
+Stack trace:
+#0 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(348): require()
+#1 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/home/pavel/Gee...', Array)
+#2 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/home/pavel/Gee...', Array," while reading upstream, client: 127.0.0.1, server: backend.test, request: "GET /assets/2af6ed3b/js/app.min.js HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "backend.test", referrer: "http://backend.test/site/login"
+2019/03/10 21:46:31 [error] 925#925: *1772 FastCGI sent in stderr: " NULL)
+#3 /home/pavel/Geekbrains/adv/backend/views/layouts/admin-lte/main.php(39): yii\base\View->render('header.php', Array)
+#4 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(348): require('/home/pavel/Gee...')
+#5 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/home/pavel/Gee...', Array)
+#6 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/Controller.php(399): yii\base\View->renderFile('/home/pavel/Gee...'" while reading upstream, client: 127.0.0.1, server: backend.test, request: "GET /assets/2af6ed3b/js/app.min.js HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "backend.test", referrer: "http://backend.test/site/login"
+2019/03/10 21:46:32 [error] 927#927: *1777 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+Error: Call to a member function getThumbUploadUrl() on null in /home/pavel/Geekbrains/adv/backend/views/layouts/admin-lte/header.php:111
+Stack trace:
+#0 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(348): require()
+#1 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/home/pavel/Gee...', Array)
+#2 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/home/pavel/Gee...', Array," while reading upstream, client: 127.0.0.1, server: backend.test, request: "GET /assets/2af6ed3b/js/app.min.js HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "backend.test", referrer: "http://backend.test/site/login"
+2019/03/10 21:46:32 [error] 927#927: *1777 FastCGI sent in stderr: " NULL)
+#3 /home/pavel/Geekbrains/adv/backend/views/layouts/admin-lte/main.php(39): yii\base\View->render('header.php', Array)
+#4 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(348): require('/home/pavel/Gee...')
+#5 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/home/pavel/Gee...', Array)
+#6 /home/pavel/Geekbrains/adv/vendor/yiisoft/yii2/base/Controller.php(399): yii\base\View->renderFile('/home/pavel/Gee...'" while reading upstream, client: 127.0.0.1, server: backend.test, request: "GET /assets/2af6ed3b/js/app.min.js HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.2-fpm.sock:", host: "backend.test", referrer: "http://backend.test/site/login"
