@@ -20,16 +20,16 @@ class UserController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::class,
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'actions' => ['logout'],
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
+//            'access' => [
+//                'class' => AccessControl::class,
+//                'rules' => [
+//                    [
+//                        'allow' => true,
+//                        'actions' => ['logout'],
+//                        'roles' => ['@'],
+//                    ],
+//                ],
+//            ],
         ];
     }
 
@@ -75,14 +75,10 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
-          // проверка на просмотр своего профиля, при просмотре других ошибка
-        if ($id != Yii::$app->user->identity->id) {
-            throw new NotFoundHttpException('Denying access for requested page.');
-        }
-
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
+
     }
 
     /**

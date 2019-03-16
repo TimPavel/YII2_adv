@@ -48,5 +48,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+
+    <?php echo \yii2mod\comments\widgets\Comment::widget([
+        'model' => $model,
+    ]); ?>
+
     <?php Pjax::end(); ?>
 </div>

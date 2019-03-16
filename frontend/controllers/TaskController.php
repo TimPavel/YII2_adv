@@ -2,6 +2,9 @@
 
 namespace frontend\controllers;
 
+use common\models\Project;
+use common\models\query\TaskQuery;
+use function React\Promise\all;
 use Yii;
 use common\models\Task;
 use common\models\search\TaskSearch;
@@ -9,6 +12,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 
 /**
  * TaskController implements the CRUD actions for Task model.
@@ -22,21 +26,21 @@ class TaskController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
-            'access' => [
-                'class' => AccessControl::class,
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'actions' => ['logout'],
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
+//            'access' => [
+//                'class' => AccessControl::class,
+//                'rules' => [
+//                    [
+//                        'allow' => true,
+//                        'actions' => ['logout'],
+//                        'roles' => ['@'],
+//                    ],
+//                ],
+//            ],
         ];
     }
 
@@ -48,6 +52,10 @@ class TaskController extends Controller
     {
         $searchModel = new TaskSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        /** @var $query TaskQuery */
+        $query = $dataProvider->query;
+        $query->byUser(Yii::$app->user->id);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -97,12 +105,16 @@ class TaskController extends Controller
     {
         $model = $this->findModel($id);
 
+        $projects = Project::find()->all();
+        $projectTitles = ArrayHelper::map($projects,'id','title');
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'projectTitles' => $projectTitles,
         ]);
     }
 

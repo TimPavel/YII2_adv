@@ -18,6 +18,10 @@ class AssignRoleEvent extends Event
     }
 }
 
+/**
+ * Class ProjectService
+ * @package common\services
+ */
 class ProjectService extends \yii\base\Component
 {
     const EVENT_ASSIGN_ROLE = 'event_assign_role';
@@ -27,7 +31,16 @@ class ProjectService extends \yii\base\Component
         $event->project = $project;
         $event->user = $user;
         $event->role = $role;
-//        print_r($event); exit();
         $this->trigger(self::EVENT_ASSIGN_ROLE, $event);
+    }
+
+    public function getRoles(Project $project, User $user)
+    {
+        return $project->getProjectUsers()->byUser($user->id)->select('role')->column();
+    }
+
+    public function hasRole(Project $project, User $user, $role)
+    {
+       return in_array($role, $this->getRoles($project, $user));
     }
 }
