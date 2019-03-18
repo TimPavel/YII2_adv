@@ -9,10 +9,11 @@ namespace common\models\query;
  */
 class ProjectUserQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
-    {
-        return $this->andWhere('[[status]]=1');
-    }*/
+    public function byUser($userId){
+        $this->andWhere(['user_id' => $userId]);
+
+        return $this;
+    }
 
     /**
      * {@inheritdoc}

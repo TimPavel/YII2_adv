@@ -9,6 +9,7 @@ use yii\widgets\DetailView;
 $this->title = $model->id;
 
 
+
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -16,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-view">
     <img src="<?= $model->getThumbUploadUrl('avatar', \common\models\User::AVATAR_PREVIEW); ?>" class="img-circle"
          alt="User Image"/>
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($model->username) ?></h1>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>

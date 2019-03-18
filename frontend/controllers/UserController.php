@@ -25,7 +25,6 @@ class UserController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['logout'],
                         'roles' => ['@'],
                     ],
                 ],
@@ -75,14 +74,10 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
-          // проверка на просмотр своего профиля, при просмотре других ошибка
-        if ($id != Yii::$app->user->identity->id) {
-            throw new NotFoundHttpException('Denying access for requested page.');
-        }
-
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
+
     }
 
     /**
