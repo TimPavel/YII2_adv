@@ -17,29 +17,29 @@ class TestController extends Controller
     /**
      * {@inheritdoc}
      */
-    // public function behaviors()
-    // {
-    //     return [
-    //         'access' => [
-    //             'class' => AccessControl::className(),
-    //             'only' => ['logout', 'signup'],
-    //             'rules' => [
-    //                 [
-    //                     'actions' => ['signup'],
-    //                     'allow' => true,
-    //                     'roles' => ['?'],
-    //                 ],
+     public function behaviors()
+     {
+         return [
+             'access' => [
+                 'class' => AccessControl::class,
+                 'only' => ['logout', 'signup'],
+                 'rules' => [
+                     [
+                         'actions' => ['signup'],
+                         'allow' => true,
+                         'roles' => ['?'],
+                     ],
                    
-    //             ],
-    //         ],
-    //         'verbs' => [
-    //             'class' => VerbFilter::className(),
-    //             'actions' => [
-    //                 'logout' => ['post'],
-    //             ],
-    //         ],
-    //     ];
-    // }
+                 ],
+             ],
+             'verbs' => [
+                 'class' => VerbFilter::class,
+                 'actions' => [
+                     'logout' => ['post'],
+                 ],
+             ],
+         ];
+     }
 
     /**
      * {@inheritdoc}

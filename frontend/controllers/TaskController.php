@@ -4,7 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Project;
 use common\models\query\TaskQuery;
-use function React\Promise\all;
+use common\models\query\UserQuery;
 use Yii;
 use common\models\Task;
 use common\models\search\TaskSearch;
@@ -31,16 +31,15 @@ class TaskController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
-//            'access' => [
-//                'class' => AccessControl::class,
-//                'rules' => [
-//                    [
-//                        'allow' => true,
-//                        'actions' => ['logout'],
-//                        'roles' => ['@'],
-//                    ],
-//                ],
-//            ],
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -146,5 +145,24 @@ class TaskController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * @param $id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionTake($id)
+    {
+        Yii::$app->taskService->takeTask($this->findModel($id), Yii::$app->user->identity);
+
+        return $this->redirect(['view', 'id' => $id]);
+    }
+
+    public function actionComplete($id)
+    {
+        Yii::$app->taskService->completeTask($this->findModel($id));
+
+        return $this->redirect(['view', 'id' => $id]);
     }
 }

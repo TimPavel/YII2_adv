@@ -25,17 +25,16 @@ class TaskService extends Component
 
     /**
      * Может ли пользователь взять задачу в работу
+     * @param Project $project
      * @param Task $task
      * @param User $user
      * @return boolean
      */
-    public function canTake(Task $task, User $user)
+    public function canTake(Project $project, Task $task, User $user)
     {
-//        if(Yii::$app->projectService->hasRole($project, $user, ProjectUser::ROLE_DEVELOPER) && $task->executor_id === null){
-//            return true;
-//        } else {
-//            return false;
-//        }
+
+        return Yii::$app->projectService->hasRole($project, $user, ProjectUser::ROLE_DEVELOPER)
+            && $task->executor_id === null;
     }
 
     /**
@@ -46,7 +45,7 @@ class TaskService extends Component
      */
     public function canComplete(Task $task, User $user)
     {
-        return $task->executor_id != $user->id && $task->completed_at === null;
+        return $task->executor_id === $user->id && $task->completed_at === null;
     }
 
     /**
@@ -59,10 +58,10 @@ class TaskService extends Component
         $task->executor_id = $user->id;
 
         if ($task->save()) {
-            Yii::$app->session->setFlash('success', "Успешно сохранено");
-            // TODO return and redirect to the page ;
+            Yii::$app->session->setFlash('success', "Взят в работу");
+        } else {
+            Yii::$app->session->setFlash('warning', "Что-то пошло не так...");
         }
-
     }
 
     /**
@@ -74,9 +73,8 @@ class TaskService extends Component
 
         if ($task->save()) {
             Yii::$app->session->setFlash('success', "Успешно сохранено");
-            // TODO return and redirect to the page
-
-
+        } else {
+            Yii::$app->session->setFlash('warning', "Что-то пошло не так...");
         }
     }
 }

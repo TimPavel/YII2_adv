@@ -5,6 +5,7 @@ namespace common\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "task".
@@ -27,6 +28,7 @@ use yii\behaviors\BlameableBehavior;
  */
 class Task extends \yii\db\ActiveRecord
 {
+
     public function behaviors()
     {
         return [
@@ -51,7 +53,7 @@ class Task extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'description', 'creator_id', 'created_at'], 'required'],
+            [['title', 'description'], 'required'],
             [['description'], 'string'],
             [['project_id', 'executor_id', 'started_at', 'completed_at', 'creator_id', 'updater_id', 'created_at', 'updated_at'], 'integer'],
             [['title'], 'string', 'max' => 255],

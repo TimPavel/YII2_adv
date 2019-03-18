@@ -5,6 +5,7 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 use common\models\Task;
 use yii\helpers\VarDumper;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\search\TaskSearch */
@@ -22,10 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Task', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php //\yii\helpers\VarDumper::dump($searchModel, 10, true);
-    //$form->field($model, 'project_id')->dropDownList('projects')
 
-    ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -33,21 +31,45 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             [
                 'label' => 'Project',
-                'attribute' => 'project.title',
-//                'filter' => \common\models\User::STATUS_LABELS,
+                'attribute' => 'project',
+                'content' => function($data) {
+                    return Html::a($data->project->title, ['project/view', 'id' => $data->project->id]);
+                },
             ],
             'title',
             'description:ntext',
-            'executor.username:ntext:Executor',
+            [
+                'label' => 'Executor',
+                'attribute' => 'executor',
+                'content' => function($data) {
+                    if (isset($data->executor->username)) {
+                        return Html::a($data->executor->username, ['user/view', 'id' => $data->executor->id]);
+                    }
+                },
+            ],
             'started_at:datetime:Started_At',
             'completed_at:datetime:Completed_At',
-            'creator.username:ntext:Creator',
-            'updater.username:ntext:Updater',
+
+            [
+                'label' => 'Creator',
+                'attribute' => 'creator',
+                'content' => function($data) {
+                    return Html::a($data->creator->username, ['user/view', 'id' => $data->creator->id]);
+                },
+                'filter' => ArrayHelper::map(\common\models\User::find()->all(), 'id', 'username')
+            ],
+            [
+                'label' => 'Updater',
+                'attribute' => 'updater',
+                'content' => function($data) {
+                    return Html::a($data->updater->username, ['user/view', 'id' => $data->updater->id]);
+                },
+            ],
             'created_at:datetime:Created_At',
             'updated_at:datetime:Updated_At',
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {delete} {take}',
+                'template' => '{view} {update} {delete} {take} {complete}',
                 'buttons' => [
                     'take' => function($url,Task $model, $key) {
                         $icon = \yii\bootstrap\Html::icon('hand-right');
@@ -56,22 +78,30 @@ $this->params['breadcrumbs'][] = $this->title;
                             'method' => 'post',
                         ],]);
                     },
+                    'complete' => function($url,Task $model, $key) {
+                        $icon = \yii\bootstrap\Html::icon('glyphicon glyphicon-check');
+                        return Html::a($icon, ['task/complete', 'id' => $model->id], ['data' => [
+                            'confirm' => 'Подтверждаете выполнение?',
+                            'method' => 'post',
+                        ],]);
+                    },
 
                 ],
                 'visibleButtons' => [
                     'update' => function(\common\models\Task $model, $key, $index) {
-                        return Yii::$app->projectService->hasRole($model->project, Yii::$app->user->identity,
-                        \common\models\ProjectUser::ROLE_MANAGER);
+                        return Yii::$app->taskService->canManage($model->project, Yii::$app->user->identity);
                     },
 
                     'delete' => function(\common\models\Task $model, $key, $index) {
-                        return Yii::$app->projectService->hasRole($model->project, Yii::$app->user->identity,
-                            \common\models\ProjectUser::ROLE_MANAGER);
+                        return Yii::$app->taskService->canManage($model->project, Yii::$app->user->identity);
                     },
 
                     'take' => function(\common\models\Task $model, $key, $index) {
-                        return Yii::$app->projectService->hasRole($model->project, Yii::$app->user->identity,
-                            \common\models\ProjectUser::ROLE_DEVELOPER);
+                        return Yii::$app->taskService->canTake($model->project, $model, Yii::$app->user->identity);
+                    },
+
+                    'complete' => function(\common\models\Task $model, $key, $index) {
+                        return Yii::$app->taskService->canComplete($model, Yii::$app->user->identity);
                     },
                 ],
             ],
@@ -80,21 +110,9 @@ $this->params['breadcrumbs'][] = $this->title;
     ]);
     ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+    <?php //\yii\helpers\VarDumper::dump($model->project, 10, true);
+    //$form->field($model, 'project_id')->dropDownList('projects')
 
-            'id',
-            'title',
-            'description:ntext',
-            'project_id',
-            'executor_id',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]);
     ?>
     <?php Pjax::end(); ?>
 </div>
