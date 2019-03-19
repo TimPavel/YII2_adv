@@ -6,6 +6,7 @@ use yii\widgets\Pjax;
 use common\models\Task;
 use yii\helpers\VarDumper;
 use yii\helpers\ArrayHelper;
+use common\models\User;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\search\TaskSearch */
@@ -46,6 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         return Html::a($data->executor->username, ['user/view', 'id' => $data->executor->id]);
                     }
                 },
+                'filter' => Html::activeDropDownList($searchModel, 'executor', ArrayHelper::map(User::find()
+                    ->onlyActive()->all(), 'id', 'username')),
             ],
             'started_at:datetime:Started_At',
             'completed_at:datetime:Completed_At',
@@ -56,7 +59,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'content' => function($data) {
                     return Html::a($data->creator->username, ['user/view', 'id' => $data->creator->id]);
                 },
-                'filter' => ArrayHelper::map(\common\models\User::find()->all(), 'id', 'username')
+                'filter' => Html::activeDropDownList($searchModel, 'creator', ArrayHelper::map(User::find()
+                    ->onlyActive()->all(), 'id', 'username')),
             ],
             [
                 'label' => 'Updater',
