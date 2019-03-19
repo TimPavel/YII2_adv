@@ -25,7 +25,7 @@ class TaskSearch extends Task
     {
         return [
             [['id', 'project_id', 'executor_id', 'started_at', 'completed_at', 'creator_id', 'updater_id', 'created_at', 'updated_at'], 'integer'],
-            [['title', 'description', 'executor', 'project'], 'safe'],
+            [['title', 'description', 'project'], 'safe'],
         ];
     }
 
@@ -96,8 +96,8 @@ class TaskSearch extends Task
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', Project::tableName().'.title', $this->project])
-            ->andFilterWhere(['like', User::tableName().'.username', $this->executor]);
+            ->andFilterWhere(['like', Project::tableName().'.title', $this->project]);
+//            ->andFilterWhere(['like', User::tableName().'.username', $this->executor]);
 
 
         return $dataProvider;
