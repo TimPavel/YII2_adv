@@ -7,6 +7,7 @@ use common\models\Task;
 use yii\helpers\VarDumper;
 use yii\helpers\ArrayHelper;
 use common\models\User;
+use common\models\Project;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\search\TaskSearch */
@@ -36,6 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'content' => function($data) {
                     return Html::a($data->project->title, ['project/view', 'id' => $data->project->id]);
                 },
+                'filter' => Html::activeDropDownList($searchModel, 'project_id', ArrayHelper::map(Project::find()
+                    ->all(), 'id', 'title')),
             ],
             'title',
             'description:ntext',
