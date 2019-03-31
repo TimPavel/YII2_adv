@@ -37,8 +37,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'content' => function($data) {
                     return Html::a($data->project->title, ['project/view', 'id' => $data->project->id]);
                 },
-                'filter' => Html::activeDropDownList($searchModel, 'project_id', ArrayHelper::map(Project::find()
-                    ->all(), 'id', 'title')),
+                'filter' => Html::activeDropDownList($searchModel, 'project_id', Project::find()
+                    ->select('title')
+                    ->indexBy('id')
+                    ->column()),
+
+//                'filter' => Html::activeDropDownList($searchModel, 'project_id', ArrayHelper::map(Project::find()
+//                    ->all(), 'id', 'title')),
             ],
             'title',
             'description:ntext',
@@ -50,8 +55,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         return Html::a($data->executor->username, ['user/view', 'id' => $data->executor->id]);
                     }
                 },
-                'filter' => Html::activeDropDownList($searchModel, 'executor', ArrayHelper::map(User::find()
-                    ->onlyActive()->all(), 'id', 'username')),
+                'filter' => Html::activeDropDownList($searchModel, 'executor',  User::find()
+                    ->select('username')
+                    ->indexBy('id')
+                    ->column()),
             ],
             'started_at:datetime:Started_At',
             'completed_at:datetime:Completed_At',
@@ -62,8 +69,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'content' => function($data) {
                     return Html::a($data->creator->username, ['user/view', 'id' => $data->creator->id]);
                 },
-                'filter' => Html::activeDropDownList($searchModel, 'creator', ArrayHelper::map(User::find()
-                    ->onlyActive()->all(), 'id', 'username')),
+                'filter' => Html::activeDropDownList($searchModel, 'creator', User::find()
+                    ->select('username')
+                    ->indexBy('id')
+                    ->column()),
             ],
             [
                 'label' => 'Updater',

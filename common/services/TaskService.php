@@ -51,30 +51,24 @@ class TaskService extends Component
     /**
      * @param Task $task
      * @param User $user
+     * @return bool
      */
     public function takeTask(Task $task, User $user)
     {
         $task->started_at = time();
         $task->executor_id = $user->id;
 
-        if ($task->save()) {
-            Yii::$app->session->setFlash('success', "Взят в работу");
-        } else {
-            Yii::$app->session->setFlash('warning', "Что-то пошло не так...");
-        }
+        return $task->save();
     }
 
     /**
      * @param Task $task
+     * @return bool
      */
     public function completeTask(Task $task)
     {
         $task->completed_at = time();
 
-        if ($task->save()) {
-            Yii::$app->session->setFlash('success', "Успешно сохранено");
-        } else {
-            Yii::$app->session->setFlash('warning', "Что-то пошло не так...");
-        }
+        return $task->save();
     }
 }

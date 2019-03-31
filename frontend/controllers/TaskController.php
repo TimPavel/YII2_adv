@@ -84,12 +84,16 @@ class TaskController extends Controller
     {
         $model = new Task();
 
+        $projects = Project::find()->all();
+        $projectTitles = ArrayHelper::map($projects,'id','title');
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'projectTitles' => $projectTitles,
         ]);
     }
 
@@ -156,12 +160,29 @@ class TaskController extends Controller
     {
         Yii::$app->taskService->takeTask($this->findModel($id), Yii::$app->user->identity);
 
+        $task = $this->findModel($id);
+
+        if ($task->save()) {
+            Yii::$app->session->setFlash('success', "Взят в работу");
+        } else {
+            Yii::$app->session->setFlash('warning', "Что-то пошло не так...");
+        }
+
+
         return $this->redirect(['view', 'id' => $id]);
     }
 
     public function actionComplete($id)
     {
         Yii::$app->taskService->completeTask($this->findModel($id));
+
+        $task = $this->findModel($id);
+
+        if ($task->save()) {
+            Yii::$app->session->setFlash('success', "Успешно сохранено");
+        } else {
+            Yii::$app->session->setFlash('warning', "Что-то пошло не так...");
+        }
 
         return $this->redirect(['view', 'id' => $id]);
     }
